@@ -1,5 +1,4 @@
-let humanScore = 0, computerScore = 0;
-
+playGame();
 function getComputerChoice(){
     let choice = Math.random();
     if(choice >= 0 && choice < 1/3){
@@ -58,5 +57,14 @@ function playRound(humanChoice, computerChoice){
         else{
             console.log("Tie.");
         }
+    }
+}
+
+function playGame(){
+    let humanScore = 0, computerScore = 0;
+    let i = 0;
+    while( i < 5){
+        playRound(getHumanChoice(), getComputerChoice());
+        i ++;
     }
 }

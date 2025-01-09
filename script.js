@@ -1,4 +1,3 @@
-console.log(getComputedChoice());
 function getComputedChoice(){
     let choice = Math.random();
     if(choice >= 0 && choice < 1/3){

@@ -1,70 +1,41 @@
-playGame();
-function getComputerChoice(){
-    let choice = Math.random();
-    if(choice >= 0 && choice < 1/3){
+function getComputerChoice() {
+    const choice = Math.random();
+    if (choice < 1 / 3) {
         return "rock";
-    }
-    else if(choice >= 1/3 && choice < 2/3){
+    } else if (choice < 2 / 3) {
         return "paper";
-    }
-    else{
+    } else {
         return "scissors";
     }
 }
 
-function getHumanChoice(){
-    let choice = prompt();
-    return choice;
-}
-
-function playRound(humanChoice, computerChoice){
+function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toLowerCase();
-    if(humanChoice == 'rock'){
-        if(computerChoice == 'rock'){
-            console.log("Tie.");
-        }
-        else if(computerChoice == 'paper'){
-            console.log("You lose.");
-            computerChoice++;
-        }
-        else{
-            console.log("You win.");
-            humanChoice++;
-        }
-    }
-    else if(humanChoice == 'paper'){
-        if(computerChoice == 'rock'){
-            console.log("You win.");
-            humanChoice++;
-        }
-        else if(computerChoice == 'paper'){
-            console.log("Tie.");
-        }
-        else{
-            console.log("You lose.");
-            computerChoice++;
-        }
-    }
-    else{
-        if(computerChoice == 'rock'){
-            console.log("You lose.");
-            computerChoice++;
-        }
-        else if(computerChoice == 'paper'){
-            console.log("You win.");
-            humanChoice++;
-        }
-        else{
-            console.log("Tie.");
-        }
+
+    if (humanChoice === computerChoice) {
+        document.querySelector('.result').innerHTML = `Tie! Both chose ${humanChoice}`;
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        document.querySelector('.result').innerHTML = `You win! ${humanChoice} beats ${computerChoice}`;
+        
+    } else {
+        document.querySelector('.result').innerHTML = `You lose! ${computerChoice} beats ${humanChoice}`;
     }
 }
 
-function playGame(){
-    let humanScore = 0, computerScore = 0;
-    let i = 0;
-    while( i < 5){
-        playRound(getHumanChoice(), getComputerChoice());
-        i ++;
-    }
+function playGame() {
+    document.querySelector(".rock").addEventListener("click", () => {
+        playRound("rock", getComputerChoice());
+    });
+    document.querySelector(".paper").addEventListener("click", () => {
+        playRound("paper", getComputerChoice());
+    });
+    document.querySelector(".scissors").addEventListener("click", () => {
+        playRound("scissors", getComputerChoice());
+    });
 }
+
+playGame();
